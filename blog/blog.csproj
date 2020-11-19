@@ -204,6 +204,11 @@
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Post\UpdateComment.cshtml" />
+    <Content Include="Views\Job\index.cshtml" />
+    <Content Include="Views\Job\show.cshtml" />
+    <Content Include="Views\Job\edit.cshtml" />
+    <Content Include="Views\Job\create.cshtml" />
+    <Content Include="Views\Home\AllJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
