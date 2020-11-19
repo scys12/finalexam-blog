@@ -1,31 +1,42 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
+<div class="container ">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class=" col-md-8">
             <div class="card">
-                <div class="card-header ">
-                    All Jobs
-                    <ul class="navbar-nav float-right">
-                        <form class="form-inline" method="GET" action="/home">
-                            <input name="cari" class="form-control mr-sm-2" type="search"
-                                   placeholder="Search Jobs..." aria-label="Search">
-                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                <div class="card-header">
+                    <h5>
+                        List Jobs
+                        <ul class="navbar-nav float-right">
+                            <form class="form-inline" method="GET" action="/home">
+                                <input name="cari" class="form-control mr-sm-2" type="search"
+                                       placeholder="Search Job..." aria-label="Search">
+                                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                    </h5>
                     </ul>
                 </div>
-                <div class="list-group list-group-flush">
-                    <a href="/pertanyaans/{{$pertanyaan->id}}" class="list-group-item list-group-item-action">
-                        <div class="d-flex">
+            </div>
+
+            <div class="list-group list-group-flush">
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex">
+                        <a href="#">
                             <small class="mb-1">
-                                Nama Perusahaan |
-                                Diunggah pada 10 Januari 2020
+                                Perusahaan
                             </small>
+                        </a>
+                        <small class="ml-auto">Diunggah pada 10 Januari 2020</small>
+                    </div>
+                    <p style="color:black;">Posisi Pekerjaan</p>
+                    <p class="small"> Gaji : Rp. 5.000.000/bulan </p>
+                    <div class="d-flex justify-content-between">
+                        <br />
+                        <div class="mr-auto">
+                            <small>Deskripsi singkat</small>
                         </div>
-                        <p>Posisi Pekerjaan</p>
-                        <small>Deskripsi Pekerjaan </small>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

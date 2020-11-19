@@ -55,6 +55,8 @@
                                     @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logout-form" }))
                                     {
                                         @Html.AntiForgeryToken()
+                                        <a class="dropdown-item" href="/Home/Contact">List Jobs</a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">
                                             Logout
@@ -78,7 +80,6 @@
             </div>
         </nav>
     </div>
-    <br />
     <br />
     <div class="py-4 body-content">
         @RenderBody()
