@@ -2,53 +2,37 @@
 <%@ include file="WEB-INF/navbar.jsp" %>
     <br>
     <br>
-    <div class="py-4 body-content">
-        <!-- CONTENT -->
-        <div class="row">    
-            <div class="col-lg-12 margin-tb">        
-                <div class="pull-left">
-                    <h2 style="font-weight: bold;margin-top:20px">All My Posts</h2>
-                </div>
-                <div class="pull-right mr-5">
-                    <a class="btn btn-success" href="../Post/Create"> Create New Post</a>
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header ">
+                        <h2 style="font-weight: bold;"> All Post </h2>
+                        <!-- kalo mau dikasih Search -->
+                        <!-- <ul class="navbar-nav float-right">
+                            <form class="form-inline" method="GET" action="/home">
+                                <input name="cari" class="form-control mr-sm-2" type="search"
+                                       placeholder="Search Jobs..." aria-label="Search">
+                                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </ul> -->
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="" class="list-group-item list-group-item-action">
+                            <div class="d-flex">
+                                <small class="mb-1">
+                                   Nama Pengunggah
+                                </small>
+                            </div>
+                            <p>Judul</p>
+                            <small>Deskripsi </small>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- @if (ViewBag.Message != "")
-        {
-            <div class="alert alert-@ViewBag.Status">
-                <strong>@ViewBag.Message</strong>
-            </div>
-        } -->
-        
-        <table class="table table-bordered table-hover" style="table-layout: fixed">
-            <tr>
-                <th width="50px">No</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th width="280px">Action</th>
-            </tr>
-            <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td style="word-wrap: break-word">Judul</td>
-                        <td style="word-wrap: break-word">
-                            Deskripsi
-                        </td>
-                        <td>
-                            <a class="btn btn-info" href="../Post/Show/@item.PostID">Show</a>
-                            <a class="btn btn-primary" href="../Post/Edit/@item.PostID">Edit</a>
-                                <a class="btn btn-danger" href="" onclick="event.preventDefault();
-                                                                        document.getElementById('delete-form').submit();">
-                                    Delete
-                                </a>
-                            
-                        </td>
-                    </tr>
-                
-        
-            </tbody>
-        </table>
+    </div>
 <%@ include file="WEB-INF/footer.jsp" %>       
 
 

@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark text-white shadow-sm">
     <div class="container">            
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/elvizablog/index.jsp">
             ElvizaComunity
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -17,10 +17,10 @@
                 <!-- @if (Request.IsAuthenticated)
                 { -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/AllPost">Home</a>
+                        <a class="nav-link" href="/elvizablog/AllPost.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Post/Index">My Post</a>
+                        <a class="nav-link" href="/elvizablog/post/index.jsp">My Post</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -29,14 +29,14 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logout-form" }))
-                            {
-                                @Html.AntiForgeryToken()
+                            <!-- @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logout-form" }))
+                            { -->
+                                <!-- @Html.AntiForgeryToken() -->
                                 <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
-                            }
+                            <!-- } -->
                         </div>
                     </li>
                 <!-- } -->

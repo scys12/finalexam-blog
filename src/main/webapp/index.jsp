@@ -20,9 +20,9 @@
                             <h2 class="welcome-text text-white">Elviza Comunity</h2>
                             <p class="small-welcome-text" >We connect each person who has high curiosity with thousands of answers that don't make sense</p>
         
-                            <a href="#" class="btn btn-second">Login</a>
+                            <a href="/elvizablog/user/login.jsp" class="btn btn-second">Login</a>
         
-                            <a href="#" class="btn btn-second">Registration</a>
+                            <a href="/elvizablog/user/register.jsp" class="btn btn-second">Registration</a>
         
                         </div>
                     </div>
