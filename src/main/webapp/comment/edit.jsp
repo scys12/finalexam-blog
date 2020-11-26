@@ -1,3 +1,7 @@
+<%@ include file="/WEB-INF/header.jspf" %>
+<%@ include file="/WEB-INF/navbar.jspf" %>
+    <br>
+    <br>
 <style>
     .container-create-post:hover{
         transform:translateY(5px);
@@ -23,3 +27,5 @@
         
     </div>
 </div>
+
+<%@ include file="/WEB-INF/footer.jspf" %>       

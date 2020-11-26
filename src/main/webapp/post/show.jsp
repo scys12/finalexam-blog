@@ -1,4 +1,7 @@
-    
+<%@ include file="/WEB-INF/header.jspf" %>
+<%@ include file="/WEB-INF/navbar.jspf" %> 
+<br>
+<br>       
         <div class="container mt-5 mb-5 ">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-8">
@@ -55,3 +58,4 @@
                 </div>
             </div>
         </div>
+        <%@ include file="/WEB-INF/footer.jspf" %>
