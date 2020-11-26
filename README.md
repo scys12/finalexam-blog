@@ -9,7 +9,7 @@
 - Run commands below:
 
 ```bash
-git commit https://github.com/scys12/finalexam-blog
+git clone https://github.com/scys12/finalexam-blog
 cd finalexam-blog
 mvn clean install
 mvn tomcat7:run
