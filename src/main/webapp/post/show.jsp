@@ -1,5 +1,5 @@
-<%@ include file="/WEB-INF/header.jspf" %>
-<%@ include file="/WEB-INF/navbar.jspf" %> 
+<%@ include file="/WEB-INF/header.jsp" %>
+<%@ include file="/WEB-INF/navbar.jsp" %> 
 <br>
 <br>       
         <div class="container mt-5 mb-5 ">
@@ -58,4 +58,4 @@
                 </div>
             </div>
         </div>
-        <%@ include file="/WEB-INF/footer.jspf" %>
+        <%@ include file="/WEB-INF/footer.jsp" %>

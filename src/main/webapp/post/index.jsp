@@ -1,5 +1,5 @@
-<%@ include file="/WEB-INF/header.jspf" %>
-<%@ include file="/WEB-INF/navbar.jspf" %>    
+<%@ include file="/WEB-INF/header.jsp" %>
+<%@ include file="/WEB-INF/navbar.jsp" %>    
     <!-- <style>
         body {
             background-image: url('../../Content/bg-7.png');
@@ -50,4 +50,4 @@
             </tr>
         </tbody>
     </table>
-<%@ include file="/WEB-INF/footer.jspf" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
