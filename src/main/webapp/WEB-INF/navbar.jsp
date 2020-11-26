@@ -15,9 +15,9 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 <!-- @if (Request.IsAuthenticated)
-                {
+                { -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/AllPost">Home</a>
+                        <a class="nav-link" href="/AllPost">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Post/Index">My Post</a>
@@ -25,7 +25,7 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            @HttpContext.Current.User.Identity.Name<span class="caret"></span>
+                           Nama<span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -39,13 +39,13 @@
                             }
                         </div>
                     </li>
-                } -->
-                <li class="nav-item">
+                <!-- } -->
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Registration</a>
-                </li>                    
+                </li>                     -->
             </ul>
         </div>
     </div>

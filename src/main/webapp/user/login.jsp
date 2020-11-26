@@ -1,0 +1,55 @@
+<%@ include file="/WEB-INF/header.jsp" %>
+<%@ include file="/WEB-INF/navbar.jsp" %>
+<style>
+    body {
+        background-image: url('../../Content/bg-6.png');
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+</style>
+
+<br />
+
+@using (Html.BeginForm( "Login", "User", FormMethod.Post, new { @style= "display: flex;justify-content: center;"})) 
+{
+    @Html.AntiForgeryToken()
+<div class="col-md-8 justify-content-between">
+    <div class="card mb-5 bg-light">
+        <div class="card-header">
+            <h2>Login</h2>
+        </div>
+        @if (ViewBag.Message != "")
+        {
+            <div class="alert alert-@ViewBag.Status">
+                <strong>@ViewBag.Message</strong>
+            </div>
+        }
+        <div class="card-body">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log In" class="btn btn-secondary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<%@ include file="/WEB-INF/footer.jsp" %>    
