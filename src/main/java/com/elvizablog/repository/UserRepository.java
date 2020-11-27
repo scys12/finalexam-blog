@@ -6,15 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.elvizablog.model.User;
-import com.elvizablog.payload.UserRequest;
+import com.elvizablog.payload.UserLoginRequest;
+import com.elvizablog.payload.UserRegisterRequest;
 import com.elvizablog.util.DatabaseConnection;
 
 public class UserRepository {
   private final String INSERT_SQL = "insert into users (name, email, password) values (?, ?, ?)";
-  private final String CHECK_EMAIL_USER = "SELECT TOP 1 email from  users where email=?";
+  private final String CHECK_EMAIL_USER = "SELECT email from  users where email=? limit 1";
   private final String GET_BY_USER_ID = "select * from users where id=?";
 
-  public void insertUser(User user) throws SQLException {
+  public void insertUser(UserRegisterRequest user) throws SQLException {
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
       preparedStatement.setString(1, user.getName());
@@ -43,20 +44,21 @@ public class UserRepository {
     return isEmailExist;
   }
 
-  public User login(UserRequest userRequest) throws SQLException {
+  public User login(UserLoginRequest userRequest) throws SQLException {
     User user = null;
+    var password = "";
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(CHECK_EMAIL_USER)) {
       preparedStatement.setString(1, userRequest.getEmail());
       ResultSet resultQuery = preparedStatement.executeQuery();
       while (resultQuery.next()) {
-        user = new User(resultQuery.getLong("id"), resultQuery.getString("name"), resultQuery.getString("email"),
-            resultQuery.getString("password"));
+        password = resultQuery.getString("password");
+        user = new User(resultQuery.getLong("id"), resultQuery.getString("name"), resultQuery.getString("email"), "");
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return user.getPassword().compareTo(userRequest.getPassword()) == 0 ? user : null;
+    return password.compareTo(userRequest.getPassword()) == 0 ? user : null;
   }
 
   public User getUserDetail(Long id) throws SQLException {

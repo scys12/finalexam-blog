@@ -10,8 +10,6 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ include file="/WEB-INF/navbar.jsp" %>
     <div class="py-4 body-content">
-        <style>
-        </style>
         <section class="welcome-section">
             <div class="container">
                 <div class="row">
