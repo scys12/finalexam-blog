@@ -33,7 +33,7 @@ public class DeleteCommentController extends HttpServlet {
         commentRepository.deleteComment(comment.getId());
         String status = "Comment successsfully deleted";
         request.getSession().setAttribute("status", status);
-        response.sendRedirect(request.getContextPath() + "/post/index.jsp");
+        response.sendRedirect((request.getHeader("referer")));
       } else {
         String status = "Comment can't deleted";
         request.getSession().setAttribute("wrong_auth", status);

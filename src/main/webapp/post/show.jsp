@@ -21,6 +21,12 @@
                         ${wrong_auth}
                     </div>
                     <c:set var="wrong_auth" value="" scope="session"/>
+                </c:if>
+                <c:if test="${not empty status}">
+                    <div class="alert alert-success" role="alert">
+                        ${status}
+                    </div>
+                    <c:set var="status" value="" scope="session"/>
                 </c:if>       
                 <a href='<%=request.getHeader("referer")%>' class="font-weight-bold" style="color:dark;">Back</a>
                 <div class="card mb-4 p-4">
@@ -59,18 +65,14 @@
                                 <%if(item.getUser().getId() == user.getId()){%>
                                     <a class="nav-link nav-link-right dropdown-toggle float-right " role="button" data-toggle="dropdown"></a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                        <a class="dropdown " >
-                                            <form action="/jawabans/{{$jwb->id}}/edit" class="mt-2 ml-2 float-left"> 
-                                            <!-- @csrf -->
-                                            <button class="btn btn-warning "type="submit" >Edit</button>   
-                                            </form>  
-                                            
-                                            <form action="/jawabans/{{$jwb->id}} " class="mt-2 mr-2 float-right " method="post"> 
-                                            <!-- @method('delete')
-                                            @csrf -->
-                                            <button class="btn btn-danger "type="submit" >Delete</button>   
+                                        <div class="d-flex" style="justify-content: space-around;">
+                                            <a href="/elvizablog/comment/edit.jsp?id=<%=post_id%>&comment_id=<%=item.getId()%>" class="btn btn-warning "type="submit" >Edit</a>
+                                        
+                                            <form action="comment/delete" class="float-right " method="post">
+                                                <input type="hidden" name="comment_id" value="<%=item.getId()%>">
+                                                <button class="btn btn-danger "type="submit" >Delete</button>
                                             </form>
-                                        </a>
+                                        </div>
                                     </div>
                                 <%}
                                 %>
