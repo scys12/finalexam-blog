@@ -3,7 +3,14 @@
 <%@page import="com.elvizablog.repository.PostRepository"%> 
 <%@page import="com.elvizablog.model.Post"%> 
 <%@page import="java.util.List"%> 
-    <div class="container mt-4">
+<style>
+    body {
+        background-image: url('public/home-bg.jpg');
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+</style>
+<br>
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

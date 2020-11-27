@@ -16,7 +16,7 @@
                 <c:if test="${not empty user}">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/elvizablog/AllPost.jsp">Home</a>
+                        <a class="nav-link" href="/elvizablog/posts.jsp">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/elvizablog/post/index.jsp">My Post</a>

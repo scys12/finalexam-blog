@@ -14,7 +14,7 @@
     <br>
     <br />
     
-    <div class="row justify-content-center">    
+    <div class="row justify-content-center ">    
         <div class="col-md-8 "> 
             <c:if test="${not empty status}">
                 <div class="alert alert-success" role="alert">
@@ -36,8 +36,8 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center"> 
-        <table class="table table-bordered table-hover col-md-8 " style="table-layout: fixed">
+    <div class="row justify-content-center "> 
+        <table class="table table-bordered table-hover col-md-8 bg-light" style="table-layout: fixed">
             <tr>
                 <th width="50px">No</th>
                 <th>Title</th>

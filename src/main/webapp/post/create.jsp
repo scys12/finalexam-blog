@@ -4,6 +4,11 @@
     .container-create-post:hover{
         transform:translateY(5px);
     }
+
+    body {
+            background-image: url('../public/bg-7.png');
+            }
+
 </style>
 <br />
 <br>
@@ -30,9 +35,13 @@
                 <label for="description">Description</label>
                 <textarea  placeholder="Description" class="form-control" id="description" type="text" name="description" style="background-color: white" height="auto" rows="7" required></textarea>
             </div>
-            <button class="btn btn-secondary" type="submit">
-                Create Post
-            </button>
+            <div>
+                <a class="btn btn-secondary mr-2" href="/elvizablog/post/">Back</a>
+                <button class="btn btn-primary " type="submit">
+                    Create Post
+                </button>
+            </div>
+
         </form>
     </div>
 </div>
