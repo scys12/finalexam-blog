@@ -13,15 +13,18 @@ import com.elvizablog.model.Comment;
 import com.elvizablog.model.Post;
 import com.elvizablog.model.User;
 import com.elvizablog.repository.CommentRepository;
+import com.elvizablog.repository.PostRepository;
 import com.elvizablog.util.InputContextValidation;
 
-@WebServlet(name = "UpdateCommentController", urlPatterns = { "/post/comment/update" })
+@WebServlet(name = "UpdateCommentController", urlPatterns = { "/comment/update" })
 public class UpdateCommentController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private CommentRepository commentRepository;
+  private PostRepository postRepository;
 
   public UpdateCommentController() {
     commentRepository = new CommentRepository();
+    postRepository = new PostRepository();
   }
 
   @Override
@@ -29,20 +32,20 @@ public class UpdateCommentController extends HttpServlet {
     User user = (User) request.getSession().getAttribute("user");
     Long postId = Long.parseLong(request.getParameter("id"));
     Long commentId = Long.parseLong(request.getParameter("comment_id"));
-    Post post = new Post(postId, user, request.getParameter("title"), request.getParameter("description"));
-    Comment comment = new Comment(commentId, post, user, request.getParameter("description"));
-    boolean isValidated = validateInput(request, comment);
-    if (isValidated) {
-      try {
+    try {
+      Post post = postRepository.getPost(postId);
+      Comment comment = new Comment(commentId, post, user, request.getParameter("description"));
+      boolean isValidated = validateInput(request, comment);
+      if (isValidated) {
         commentRepository.updateComment(comment);
-        String status = "Comment successsfully post";
-        request.setAttribute("status", status);
-        response.sendRedirect(request.getContextPath() + "/show.jsp?id=" + postId);
-      } catch (SQLException e) {
-        e.printStackTrace();
+        String status = "Comment successsfully updated";
+        request.getSession().setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/post/show.jsp?id=" + postId);
+      } else {
+        response.sendRedirect(request.getHeader("referer"));
       }
-    } else {
-      response.sendRedirect(request.getHeader("referer"));
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
@@ -50,7 +53,7 @@ public class UpdateCommentController extends HttpServlet {
     boolean checkDescription = InputContextValidation.checkMaximumLength(comment.getDescription(), 200)
         && InputContextValidation.checkMinimumLength(comment.getDescription(), 4);
     if (!checkDescription) {
-      String status = "Minimum title length is 4 and maximum length is 50";
+      String status = "Minimum description length is 4 and maximum length is 50";
       request.getSession().setAttribute("wrong_auth", status);
       return false;
     }

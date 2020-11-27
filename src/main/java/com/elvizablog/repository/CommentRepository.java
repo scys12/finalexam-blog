@@ -64,6 +64,7 @@ public class CommentRepository {
     Comment comment = null;
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(GET_COMMENT)) {
+      preparedStatement.setLong(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         User user = userRepository.getUserDetail(resultSet.getLong("user_id"));

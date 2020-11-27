@@ -55,7 +55,7 @@ public class CreateCommentController extends HttpServlet {
     boolean checkDescription = InputContextValidation.checkMaximumLength(comment.getDescription(), 200)
         && InputContextValidation.checkMinimumLength(comment.getDescription(), 4);
     if (!checkDescription) {
-      String status = "Minimum title length is 4 and maximum length is 50";
+      String status = "Minimum description length is 4 and maximum length is 50";
       request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
