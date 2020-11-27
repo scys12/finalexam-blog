@@ -28,7 +28,7 @@
                     </div>
                     <c:set var="status" value="" scope="session"/>
                 </c:if>       
-                <a href='/elvizablog/posts.jsp' class="font-weight-bold" style="color:dark;">Back</a>
+                <a href="/elvizablog/posts.jsp" class="font-weight-bold" style="color:dark;">Back</a>
                 <div class="card mb-4 p-4">
                     <%                        
                         Long post_id = Long.parseLong(request.getParameter("id"));
