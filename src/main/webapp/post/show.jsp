@@ -23,7 +23,8 @@
     
                 <!-- BUAT KOMENTAR -->
                 <h5> Tambahkan Komentar </h5>
-                <form method="POST" action="comment/insert">
+                <form method="POST" action="comment/create">
+                    <input type="hidden" name="id" value="<%=post.getId()%>">
                     <div class="form-group">
                         <textarea name="description" class="form-control" rows="3"></textarea>
                     </div>
