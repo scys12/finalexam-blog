@@ -1,12 +1,23 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ include file="/WEB-INF/navbar.jsp" %> 
-<%@page import="com.elvizablog.repository.PostRepository"%> 
+<%@page import="com.elvizablog.repository.CommentRepository"%> 
 <%@page import="com.elvizablog.model.Post"%> 
+<%@page import="com.elvizablog.repository.PostRepository"%> 
+<%@page import="com.elvizablog.model.Comment"%> 
+<%@page import="com.elvizablog.model.User"%> 
+<%@page import="java.util.List"%> 
+<%@page import="javax.servlet.http.HttpSession"%>
 
 <main class="py-4">
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-8">
+                <c:if test="${not empty wrong_auth}">
+                    <div class="alert alert-danger" role="alert">
+                        ${wrong_auth}
+                    </div>
+                    <c:set var="wrong_auth" value="" scope="session"/>
+                </c:if>       
                 <a href='<%=request.getHeader("referer")%>' class="font-weight-bold" style="color:dark;">Kembali</a>
                 <div class="card mb-4 p-4">
                     <%                        
@@ -33,34 +44,39 @@
     
                 <!-- DAFTAR KOMENTAR -->
                 <h3 class="mb-3">Komentar </h3>
-                <!-- @foreach ($jawaban as $jwb) -->
-                <div class="card bg-white ">
-                    <div class="card-header">
-                        <!-- @if ($jwb->user_id == Auth::user()->id) -->
-                        <a class="nav-link nav-link-right dropdown-toggle float-right " role="button" data-toggle="dropdown"></a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown " >
-                                <form action="/jawabans/{{$jwb->id}}/edit" class="mt-2 ml-2 float-left"> 
-                                <!-- @csrf -->
-                                <button class="btn btn-warning "type="submit" >Edit</button>   
-                                </form>  
-                                
-                                <form action="/jawabans/{{$jwb->id}} " class="mt-2 mr-2 float-right " method="post"> 
-                                <!-- @method('delete')
-                                @csrf -->
-                                <button class="btn btn-danger "type="submit" >Delete</button>   
-                                </form>
-                            </a>
-                        </div>
-                        <!-- @endif -->
-                        <div>Nama </div>
-                    </div>
-                    <div class="comment-text-sm ml-3">
-                        <span>Isi Komentar</span>
-                    </div>
-                </div>
-                <h1> </h1>
-                <!-- @endforeach -->
+                <%
+                    CommentRepository commentRepository = new CommentRepository();
+                    User user = (User) session.getAttribute("user");
+                    List<Comment> comments = commentRepository.getPostComments(post_id);
+                    for(Comment item: comments){%> 
+                        <div class="card bg-white mb-3">
+                            <div class="card-header">
+                                <%if(item.getUser().getId() == user.getId()){%>
+                                    <a class="nav-link nav-link-right dropdown-toggle float-right " role="button" data-toggle="dropdown"></a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                        <a class="dropdown " >
+                                            <form action="/jawabans/{{$jwb->id}}/edit" class="mt-2 ml-2 float-left"> 
+                                            <!-- @csrf -->
+                                            <button class="btn btn-warning "type="submit" >Edit</button>   
+                                            </form>  
+                                            
+                                            <form action="/jawabans/{{$jwb->id}} " class="mt-2 mr-2 float-right " method="post"> 
+                                            <!-- @method('delete')
+                                            @csrf -->
+                                            <button class="btn btn-danger "type="submit" >Delete</button>   
+                                            </form>
+                                        </a>
+                                    </div>
+                                <%}
+                                %>
+                                <div><%=item.getUser().getName()%></div>
+                            </div>
+                            <div class="comment-text-sm ml-3">
+                                <span><%=item.getDescription()%></span>
+                            </div>
+                        </div>                        
+                    <%}
+                %>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <form action="logout" method="post" id="logout-form">
+                            <form action="/elvizablog/logout" method="post" id="logout-form">
                                 <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                     Logout

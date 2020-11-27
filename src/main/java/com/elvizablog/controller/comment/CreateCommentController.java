@@ -41,7 +41,7 @@ public class CreateCommentController extends HttpServlet {
       if (isValidated) {
         commentRepository.insertComment(comment);
         String status = "Comment successsfully post";
-        request.setAttribute("status", status);
+        request.getSession().setAttribute("status", status);
         response.sendRedirect(request.getHeader("referer"));
       } else {
         response.sendRedirect(request.getHeader("referer"));

@@ -23,7 +23,7 @@
                 <c:set var="status" value="" scope="session"/>
             </c:if>       
             <c:if test="${not empty wrong_auth}">
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     ${wrong_auth}
                 </div>
                 <c:set var="wrong_auth" value="" scope="session"/>

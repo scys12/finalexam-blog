@@ -15,7 +15,7 @@ import com.elvizablog.util.DatabaseConnection;
 public class CommentRepository {
   private final String INSERT_COMMENT = "insert into comments (user_id, post_id, description) values (?, ?, ?)";
   private final String UPDATE_COMMENT = "update comments set user_id=?, post_id=?, description=? where id=?";
-  private final String DELETE_COMMENT = "delete comments where id=?";
+  private final String DELETE_COMMENT = "delete from comments where id=?";
   private final String GET_COMMENT = "select * from comments where id=?";
   private final String GET_POST_COMMENTS = "select * from comments where post_id=?";
   private UserRepository userRepository = new UserRepository();
@@ -80,6 +80,7 @@ public class CommentRepository {
     List<Comment> comments = new ArrayList<Comment>();
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(GET_POST_COMMENTS)) {
+      preparedStatement.setLong(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         User user = userRepository.getUserDetail(resultSet.getLong("user_id"));
