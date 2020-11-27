@@ -5,11 +5,11 @@
 <%@page import="com.elvizablog.model.User"%> 
 <%@page import="java.util.List"%> 
 <%@page import="javax.servlet.http.HttpSession"%>
-    <!-- <style>
+    <style>
         body {
-            background-image: url('../../Content/bg-7.png');
-            "}
-    </style> -->
+            background-image: url('public/bg-7.png');
+            }
+    </style>
     <br>
     <br>
     <br />
