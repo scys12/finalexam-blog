@@ -14,8 +14,8 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                <!-- @if (Request.IsAuthenticated)
-                { -->
+                @if (Request.IsAuthenticated)
+                {
                     <li class="nav-item">
                         <a class="nav-link" href="/elvizablog/AllPost.jsp">Home</a>
                     </li>
@@ -39,13 +39,13 @@
                             <!-- } -->
                         </div>
                     </li>
-                <!-- } -->
-                <!-- <li class="nav-item">
+                }
+                <li class="nav-item">
                     <a class="nav-link" href="/elvizablog/user/login.jsp">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/elvizablog/user/register.jsp">Registration</a>
-                </li>                     -->
+                </li>                    
             </ul>
         </div>
     </div>
