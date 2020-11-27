@@ -31,12 +31,11 @@
                         for(Post item: posts){%> 
                             <div class="list-group list-group-flush">
                                 <a href="/elvizablog/post/show.jsp?id=<%=item.getId()%>" class="list-group-item list-group-item-action">
-                                    <div class="d-flex">
-                                        <small class="mb-1">
-                                            <%=item.getUser().getName()%>
+                                    <p class="font-weight-bold mb-0"><%=item.getTitle()%></p>
+                                        <small class="mb-1 mt-0">
+                                            Author:  <%=item.getUser().getName()%>
                                         </small>
-                                    </div>
-                                    <p><%=item.getTitle()%></p>
+                                    <div class="dropdown-divider"></div>
                                     <small><%=item.getDescription()%></small>
                                 </a>
                             </div>                            
