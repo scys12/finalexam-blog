@@ -3,6 +3,13 @@
     <br>
     <br>
     <br>
+    @if (session('errors'))
+        <div class="alert alert-danger" style="margin-top: 5px">
+        <ul >
+            <li style = "list-style-type: none; text-align:right; padding-bottom:5px"><strong>{{session('errors')}}</strong></li>
+        </ul>
+        </div>                  
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
