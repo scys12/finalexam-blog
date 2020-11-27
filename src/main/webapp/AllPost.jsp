@@ -19,7 +19,7 @@
                         </ul> -->
                     </div>
                     <div class="list-group list-group-flush">
-                        <a href="" class="list-group-item list-group-item-action">
+                        <a href="/elvizablog/post/show.jsp" class="list-group-item list-group-item-action">
                             <div class="d-flex">
                                 <small class="mb-1">
                                    Nama Pengunggah

@@ -41,10 +41,10 @@
                     </li>
                 <!-- } -->
                 <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="/elvizablog/user/login.jsp">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Registration</a>
+                    <a class="nav-link" href="/elvizablog/user/register.jsp">Registration</a>
                 </li>                     -->
             </ul>
         </div>
