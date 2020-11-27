@@ -33,7 +33,7 @@ public class UserRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(CHECK_EMAIL_USER)) {
       preparedStatement.setString(1, email);
       ResultSet resultQuery = preparedStatement.executeQuery();
-      if (resultQuery.first()) {
+      if (resultQuery.next()) {
         isEmailExist = true;
       } else {
         isEmailExist = false;

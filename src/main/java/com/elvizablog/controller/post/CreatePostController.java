@@ -1,14 +1,17 @@
 package com.elvizablog.controller.post;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.elvizablog.model.Post;
+import com.elvizablog.model.User;
+import com.elvizablog.payload.PostRequest;
 import com.elvizablog.repository.PostRepository;
 import com.elvizablog.util.InputContextValidation;
 
@@ -23,10 +26,26 @@ public class CreatePostController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    User user = (User) request.getSession().getAttribute("user");
+    PostRequest post = new PostRequest(user, request.getParameter("title"), request.getParameter("description"));
+    var isValidated = validateInput(request, post);
+    if (isValidated) {
+      try {
+        postRepository.insertPost(post);
+        String status = "Post successsfully inserted";
+        request.setAttribute("status", status);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
+        requestDispatcher.forward(request, response);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
+      requestDispatcher.forward(request, response);
+    }
   }
 
-  private boolean validateInput(HttpServletRequest request, Post post) {
+  private boolean validateInput(HttpServletRequest request, PostRequest post) {
     boolean checkTitle = InputContextValidation.checkMaximumLength(post.getTitle(), 50)
         && InputContextValidation.checkMinimumLength(post.getTitle(), 4);
     if (!checkTitle) {
@@ -42,5 +61,6 @@ public class CreatePostController extends HttpServlet {
       request.setAttribute("wrong_auth", status);
       return false;
     }
+    return true;
   }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.elvizablog.model.Post;
 import com.elvizablog.model.User;
+import com.elvizablog.payload.PostRequest;
 import com.elvizablog.util.DatabaseConnection;
 
 /**
@@ -23,7 +24,7 @@ public class PostRepository {
   private final String GET_USER_POSTS = "select * from posts where user_id=?";
   private UserRepository userRepository = new UserRepository();
 
-  public void insertPost(Post post) throws SQLException {
+  public void insertPost(PostRequest post) throws SQLException {
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_POST)) {
       preparedStatement.setLong(1, post.getUser().getId());
@@ -50,7 +51,7 @@ public class PostRepository {
     return isUpdated;
   }
 
-  public boolean deletePost(int id) throws SQLException {
+  public boolean deletePost(Long id) throws SQLException {
     boolean isDeleted = false;
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_POST)) {

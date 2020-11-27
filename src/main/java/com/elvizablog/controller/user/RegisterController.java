@@ -36,12 +36,10 @@ public class RegisterController extends HttpServlet {
       if (isValidated) {
         userRegisterRequest.setPassword(InputContextValidation.convertToMD5(userRegisterRequest.getPassword()));
         userRepository.insertUser(userRegisterRequest);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/login.jsp");
-        requestDispatcher.forward(request, response);
-      } else {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/register.jsp");
-        requestDispatcher.include(request, response);
+        String result = "Account successfully registered. Now You can login using this account";
+        request.getSession().setAttribute("success", result);
       }
+      response.sendRedirect("/register.jsp");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -51,33 +49,33 @@ public class RegisterController extends HttpServlet {
     boolean isValidatedEmail = InputContextValidation.checkEmailRegex(user.getEmail());
     if (!isValidatedEmail) {
       String status = "Wrong email pattern";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     boolean isEmailExist = userRepository.checkEmailExist(user.getEmail());
     if (isEmailExist) {
       String status = "Your email exists. Please login using this email";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     boolean isEmailTooLong = InputContextValidation.checkMaximumLength(user.getEmail(), 30)
         && InputContextValidation.checkMinimumLength(user.getEmail(), 4);
     if (!isEmailTooLong) {
       String status = "Minimum email length is 8 and maximum length is 30";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     boolean isPasswordLong = InputContextValidation.checkMinimumLength(user.getPassword(), 8);
     if (!isPasswordLong) {
       String status = "Minimum password length is 8";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     boolean isPasswordSame = InputContextValidation.checkPasswordSame(user.getPassword(),
         user.getConfirmationPassword());
     if (!isPasswordSame) {
       String status = "Password and Confirmation password are different. Please type again";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     return true;

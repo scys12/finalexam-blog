@@ -35,13 +35,11 @@ public class LoginController extends HttpServlet {
       if (user != null) {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-        requestDispatcher.forward(request, response);
+        response.sendRedirect("/register.jsp");
       } else {
         String status = "Wrong email/password";
-        request.setAttribute("wrong_auth", status);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
-        requestDispatcher.include(request, response);
+        request.getSession().setAttribute("wrong_auth", status);
+        response.sendRedirect("/login.jsp");
       }
     } catch (SQLException e) {
       e.printStackTrace();

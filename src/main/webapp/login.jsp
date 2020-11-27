@@ -1,5 +1,7 @@
+
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ include file="/WEB-INF/navbar.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
     body {
         background-image: url('public/home-bg.jpg');
@@ -8,39 +10,44 @@
 </style>
 
 <br />
-<form action="login" method="post">
-    <div class="col-md-8 justify-content-between">
-        <c:if test="${submitted}">
-            <p>Lemah</p>
-        </c:if>    
-        <div class="card mb-5 bg-light">
-            <div class="card-header">
-                <h2>Login</h2>
-            </div>            
-            <div class="card-body">
-                <div class="form-horizontal">
-                    <div class="form-group">                        
-                        <label for="email">Email</label>
-                        <div class="col-md-10">
-                            <input type="email" class="form-control" id="email" name="email" >
-                        </div>
+<main class="py-4 mt-4">
+    <form action="login" method="post" class="d-flex justify-content-center">
+        <div class="col-md-8 justify-content-between">
+            <div class="card mb-5 bg-light">
+                <div class="card-header">
+                    <h2>Login</h2>
+                </div>            
+                <c:if test="${not empty wrong_auth}">
+                    <div class="alert alert-danger" role="alert">
+                        ${wrong_auth}
                     </div>
-    
-                    <div class="form-group">                        
-                        <label for="exampleInputPassword1">Password</label>
-                        <div class="col-md-10">
-                            <input type="password" class="form-control" id="password" name="password">
+                    <c:set var="wrong_auth" value="" scope="session"/>
+                </c:if>
+                <div class="card-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">                        
+                            <label for="email">Email</label>
+                            <div class="col-md-10">
+                                <input type="email" class="form-control" id="email" name="email" >
+                            </div>
                         </div>
-                    </div>
-    
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log In" class="btn btn-secondary" />
+        
+                        <div class="form-group">                        
+                            <label for="exampleInputPassword1">Password</label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log In" class="btn btn-secondary" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</main>
 <%@ include file="/WEB-INF/footer.jsp" %>    
