@@ -32,33 +32,36 @@ public class UpdatePostController extends HttpServlet {
     String title = request.getParameter("title");
     String description = request.getParameter("description");
     Post post = new Post(id, user, title, description);
-    var isValidated = validateInput(request, post, user);
+    boolean checkUser = validateUser(user, post);
+    if (!checkUser) {
+      response.sendRedirect(request.getHeader("referer"));
+      return;
+    }
+    var isValidated = validateInput(request, post);
     if (isValidated) {
       try {
         postRepository.updatePost(post);
         String status = "Post successsfully updated";
-        request.setAttribute("status", status);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-        requestDispatcher.forward(request, response);
+        request.getSession().setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/post/index.jsp");
       } catch (SQLException e) {
         e.printStackTrace();
       }
     } else {
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-      requestDispatcher.forward(request, response);
+      response.sendRedirect(request.getHeader("referer"));
     }
   }
 
-  private boolean validateInput(HttpServletRequest request, Post post, User user) {
-    boolean checkUser = user.getId() == post.getUser().getId();
-    if (!checkUser) {
-      return false;
-    }
+  private boolean validateUser(User user, Post post) {
+    return user.getId() == post.getUser().getId();
+  }
+
+  private boolean validateInput(HttpServletRequest request, Post post) {
     boolean checkTitle = InputContextValidation.checkMaximumLength(post.getTitle(), 50)
         && InputContextValidation.checkMinimumLength(post.getTitle(), 4);
     if (!checkTitle) {
       String status = "Minimum title length is 4 and maximum length is 50";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
 
@@ -66,7 +69,7 @@ public class UpdatePostController extends HttpServlet {
         && InputContextValidation.checkMinimumLength(post.getDescription(), 4);
     if (!checkDescription) {
       String status = "Minimum description length is 4 and maximum length is 200";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     return true;

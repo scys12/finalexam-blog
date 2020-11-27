@@ -13,9 +13,8 @@
             <!-- Left Side Of Navbar -->
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @if (Request.IsAuthenticated)
-                {
+                <c:if test="${not empty user}">
+                    <!-- Authentication Links -->
                     <li class="nav-item">
                         <a class="nav-link" href="/elvizablog/AllPost.jsp">Home</a>
                     </li>
@@ -24,28 +23,28 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                           Nama<span class="caret"></span>
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        ${user.email}<span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <!-- @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logout-form" }))
-                            { -->
-                                <!-- @Html.AntiForgeryToken() -->
+                            <form action="logout" method="post" id="logout-form">
                                 <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                     Logout
-                                </a>
-                            <!-- } -->
+                                </a>                                    
+                            </form>
                         </div>
                     </li>
-                }
-                <li class="nav-item">
-                    <a class="nav-link" href="/elvizablog/user/login.jsp">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/elvizablog/user/register.jsp">Registration</a>
-                </li>                    
+                </c:if>
+                <c:if test="${empty user}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/elvizablog/login.jsp">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/elvizablog/register.jsp">Registration</a>
+                    </li>
+                </c:if>                    
             </ul>
         </div>
     </div>

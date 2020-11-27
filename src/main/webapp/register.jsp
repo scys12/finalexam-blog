@@ -1,6 +1,5 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ include file="/WEB-INF/navbar.jsp" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
     body {
@@ -28,7 +27,7 @@
                     <div class="alert alert-success" role="alert">
                         ${success}
                     </div>
-                    <c:set var="wrong_auth" value="" scope="session"/>
+                    <c:set var="success" value="" scope="session"/>
                 </c:if>
                 
                 <div class="card-body">

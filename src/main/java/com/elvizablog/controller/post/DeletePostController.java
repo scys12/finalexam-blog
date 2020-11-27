@@ -14,7 +14,6 @@ import com.elvizablog.model.Post;
 import com.elvizablog.model.User;
 import com.elvizablog.payload.PostRequest;
 import com.elvizablog.repository.PostRepository;
-import com.elvizablog.util.InputContextValidation;
 
 @WebServlet(name = "DeletePostController", urlPatterns = { "/post/delete" })
 public class DeletePostController extends HttpServlet {
@@ -35,12 +34,13 @@ public class DeletePostController extends HttpServlet {
       if (isValidated) {
         postRepository.deletePost(post.getId());
         String status = "Post successsfully deleted";
-        request.setAttribute("status", status);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-        requestDispatcher.forward(request, response);
+        request.getSession().setAttribute("status", status);
+        request.getSession().setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/post/index.jsp");
       } else {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(request.getHeader("referer"));
-        requestDispatcher.forward(request, response);
+        String status = "Post can't deleted";
+        request.getSession().setAttribute("wrong_auth", status);
+        response.sendRedirect(request.getHeader("referer"));
       }
     } catch (NumberFormatException e1) {
       // TODO Auto-generated catch block

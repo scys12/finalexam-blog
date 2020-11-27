@@ -39,13 +39,20 @@ public class RegisterController extends HttpServlet {
         String result = "Account successfully registered. Now You can login using this account";
         request.getSession().setAttribute("success", result);
       }
-      response.sendRedirect("/register.jsp");
+      response.sendRedirect(request.getContextPath() + "/register.jsp");
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   public boolean validateInputRegister(HttpServletRequest request, UserRegisterRequest user) throws SQLException {
+    boolean isNameTooLong = InputContextValidation.checkMaximumLength(user.getName(), 30)
+        && InputContextValidation.checkMinimumLength(user.getName(), 4);
+    if (!isNameTooLong) {
+      String status = "Minimum name length is 8 and maximum length is 30";
+      request.getSession().setAttribute("wrong_auth", status);
+      return false;
+    }
     boolean isValidatedEmail = InputContextValidation.checkEmailRegex(user.getEmail());
     if (!isValidatedEmail) {
       String status = "Wrong email pattern";

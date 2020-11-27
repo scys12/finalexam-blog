@@ -33,15 +33,13 @@ public class CreatePostController extends HttpServlet {
       try {
         postRepository.insertPost(post);
         String status = "Post successsfully inserted";
-        request.setAttribute("status", status);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-        requestDispatcher.forward(request, response);
+        request.getSession().setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/post/index.jsp");
       } catch (SQLException e) {
         e.printStackTrace();
       }
     } else {
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-      requestDispatcher.forward(request, response);
+      response.sendRedirect(request.getContextPath() + "/post/create.jsp");
     }
   }
 
@@ -50,7 +48,7 @@ public class CreatePostController extends HttpServlet {
         && InputContextValidation.checkMinimumLength(post.getTitle(), 4);
     if (!checkTitle) {
       String status = "Minimum title length is 4 and maximum length is 50";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
 
@@ -58,7 +56,7 @@ public class CreatePostController extends HttpServlet {
         && InputContextValidation.checkMinimumLength(post.getDescription(), 4);
     if (!checkDescription) {
       String status = "Minimum description length is 4 and maximum length is 200";
-      request.setAttribute("wrong_auth", status);
+      request.getSession().setAttribute("wrong_auth", status);
       return false;
     }
     return true;

@@ -30,16 +30,17 @@ public class LoginController extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     UserLoginRequest userLoginRequest = new UserLoginRequest(request.getParameter("email"),
         InputContextValidation.convertToMD5(request.getParameter("password")));
+    System.out.println(userLoginRequest.getPassword());
     try {
       User user = userRepository.login(userLoginRequest);
       if (user != null) {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        response.sendRedirect("/register.jsp");
+        response.sendRedirect(request.getContextPath() + "/post/index.jsp");
       } else {
         String status = "Wrong email/password";
         request.getSession().setAttribute("wrong_auth", status);
-        response.sendRedirect("/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
       }
     } catch (SQLException e) {
       e.printStackTrace();

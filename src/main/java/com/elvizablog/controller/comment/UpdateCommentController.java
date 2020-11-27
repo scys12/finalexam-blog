@@ -1,4 +1,4 @@
-package com.elvizablog.controller.post;
+package com.elvizablog.controller.comment;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

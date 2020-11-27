@@ -12,7 +12,7 @@ import com.elvizablog.util.DatabaseConnection;
 
 public class UserRepository {
   private final String INSERT_SQL = "insert into users (name, email, password) values (?, ?, ?)";
-  private final String CHECK_EMAIL_USER = "SELECT email from  users where email=? limit 1";
+  private final String CHECK_EMAIL_USER = "SELECT * from  users where email=? limit 1";
   private final String GET_BY_USER_ID = "select * from users where id=?";
 
   public void insertUser(UserRegisterRequest user) throws SQLException {

@@ -8,7 +8,6 @@ import com.elvizablog.payload.UserLoginRequest;
 import com.elvizablog.repository.UserRepository;
 import com.elvizablog.util.InputContextValidation;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +22,6 @@ public class LogoutController extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession();
     session.invalidate();
-    response.sendRedirect("/");
+    response.sendRedirect(request.getContextPath());
   }
 }

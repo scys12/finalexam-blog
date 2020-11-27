@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(servletNames = { "CreatePostController", "EditPostController", "DeletePostController",
-        "ShowAllPostController", "ShowPostController", "UpdatePostController" })
+        "ShowAllPostController", "ShowPostController", "UpdatePostController" }, urlPatterns = { "/post/*" })
 public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -30,6 +30,7 @@ public class AuthenticationFilter implements Filter {
         if (loggedIn || loginRequest) {
             chain.doFilter(request, response);
         } else {
+            request.setAttribute("wrong_auth", "You must login first");
             response.sendRedirect(loginURI);
         }
     }

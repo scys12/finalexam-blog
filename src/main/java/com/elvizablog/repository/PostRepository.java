@@ -19,7 +19,7 @@ public class PostRepository {
   private final String INSERT_POST = "insert into posts (user_id, title, description) values (?, ?, ?)";
   private final String GET_ALL_POSTS = "SELECT * FROM posts";
   private final String UPDATE_POST = "update posts set user_id=?, title=?, description=? where id=?";
-  private final String DELETE_POST = "delete posts where id=?";
+  private final String DELETE_POST = "delete from posts where id=?";
   private final String GET_POST = "select * from posts where id=?";
   private final String GET_USER_POSTS = "select * from posts where user_id=?";
   private UserRepository userRepository = new UserRepository();
@@ -84,6 +84,7 @@ public class PostRepository {
     Post post = null;
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(GET_POST)) {
+      preparedStatement.setLong(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         User user = userRepository.getUserDetail(resultSet.getLong("user_id"));
@@ -100,6 +101,7 @@ public class PostRepository {
     List<Post> posts = new ArrayList<Post>();
     try (Connection connection = DatabaseConnection.initializeDatabase();
         PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_POSTS)) {
+      preparedStatement.setLong(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         User user = userRepository.getUserDetail(resultSet.getLong("user_id"));

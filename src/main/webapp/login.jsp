@@ -1,7 +1,6 @@
 
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ include file="/WEB-INF/navbar.jsp" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
     body {
         background-image: url('public/home-bg.jpg');
@@ -28,14 +27,14 @@
                         <div class="form-group">                        
                             <label for="email">Email</label>
                             <div class="col-md-10">
-                                <input type="email" class="form-control" id="email" name="email" >
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
         
                         <div class="form-group">                        
-                            <label for="exampleInputPassword1">Password</label>
+                            <label for="password">Password</label>
                             <div class="col-md-10">
-                                <input type="password" class="form-control" id="password" name="password">
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
         
