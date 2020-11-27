@@ -22,6 +22,12 @@
                 </div>
                 <c:set var="status" value="" scope="session"/>
             </c:if>       
+            <c:if test="${not empty wrong_auth}">
+                <div class="alert alert-success" role="alert">
+                    ${wrong_auth}
+                </div>
+                <c:set var="wrong_auth" value="" scope="session"/>
+            </c:if>       
             <div class="pull-left">
                 <h2 style="font-weight: bold;">All My Posts</h2>
             </div>

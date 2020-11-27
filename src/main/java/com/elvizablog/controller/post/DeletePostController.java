@@ -35,7 +35,6 @@ public class DeletePostController extends HttpServlet {
         postRepository.deletePost(post.getId());
         String status = "Post successsfully deleted";
         request.getSession().setAttribute("status", status);
-        request.getSession().setAttribute("status", status);
         response.sendRedirect(request.getContextPath() + "/post/index.jsp");
       } else {
         String status = "Post can't deleted";

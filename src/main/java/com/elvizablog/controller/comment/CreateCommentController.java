@@ -13,38 +13,41 @@ import com.elvizablog.model.Comment;
 import com.elvizablog.model.Post;
 import com.elvizablog.model.User;
 import com.elvizablog.repository.CommentRepository;
+import com.elvizablog.repository.PostRepository;
 import com.elvizablog.util.InputContextValidation;
 
-@WebServlet(name = "CreateCommentController", urlPatterns = { "/comment/create" })
+@WebServlet(name = "CreateCommentController", urlPatterns = { "/post/comment/create" })
 public class CreateCommentController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private CommentRepository commentRepository;
+  private PostRepository postRepository;
 
   public CreateCommentController() {
     commentRepository = new CommentRepository();
+    postRepository = new PostRepository();
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User user = (User) request.getSession().getAttribute("user");
     Long postId = Long.parseLong(request.getParameter("id"));
-    Post post = new Post(postId, user, request.getParameter("title"), request.getParameter("description"));
-    Comment comment = new Comment();
-    comment.setDescription(request.getParameter("description"));
-    comment.setPost(post);
-    comment.setUser(user);
-    boolean isValidated = validateInput(request, comment);
-    if (isValidated) {
-      try {
+    try {
+      Post post = postRepository.getPost(postId);
+      Comment comment = new Comment();
+      comment.setDescription(request.getParameter("description"));
+      comment.setPost(post);
+      comment.setUser(user);
+      boolean isValidated = validateInput(request, comment);
+      if (isValidated) {
         commentRepository.insertComment(comment);
         String status = "Comment successsfully post";
         request.setAttribute("status", status);
         response.sendRedirect(request.getHeader("referer"));
-      } catch (SQLException e) {
-        e.printStackTrace();
+      } else {
+        response.sendRedirect(request.getHeader("referer"));
       }
-    } else {
-      response.sendRedirect(request.getContextPath() + "/post/create.jsp");
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
