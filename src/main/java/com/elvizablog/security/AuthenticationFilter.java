@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(servletNames = { "CreatePostController", "EditPostController", "DeletePostController",
         "ShowAllPostController", "ShowPostController",
-        "UpdatePostController" }, urlPatterns = { "/post/*", "/comment/*" })
+        "UpdatePostController" }, urlPatterns = { "/post/*", "/comment/*", "/profile/*" })
 public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)

@@ -29,16 +29,23 @@
                         PostRepository postRepository = new PostRepository();
                         List<Post> posts = postRepository.getAllPosts();
                         for(Post item: posts){%> 
+                            <%
+                                String title = item.getTitle();
+                                title = title.length() > 30 ? title.substring(0,30)+"..." : title;
+                                String description = item.getDescription();
+                                description = description.length() > 25 ? description.substring(0,25)+"..." : description;
+                            %>
                             <div class="list-group list-group-flush">
                                 <a href="/elvizablog/post/show.jsp?id=<%=item.getId()%>" class="list-group-item list-group-item-action">
-                                    <p class="font-weight-bold mb-0"><%=item.getTitle()%></p>
-                                        <small class="mb-1 mt-0">
-                                            Author:  <%=item.getUser().getName()%>
+                                    <div class="d-flex">
+                                        <small class="mb-1">
+                                            Author: <%=item.getUser().getName()%>
                                         </small>
-                                    <div class="dropdown-divider"></div>
-                                    <small><%=item.getDescription()%></small>
+                                    </div>
+                                    <p style="font-size: 18px; font-weight: 700"><%=title%></p>
+                                    <small style="font-size:16px"><%=description%></small>
                                 </a>
-                            </div>                            
+                            </div>
                         <%}
                     %>                    
                 </div>

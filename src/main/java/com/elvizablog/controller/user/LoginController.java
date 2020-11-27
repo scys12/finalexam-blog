@@ -30,7 +30,6 @@ public class LoginController extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     UserLoginRequest userLoginRequest = new UserLoginRequest(request.getParameter("email"),
         InputContextValidation.convertToMD5(request.getParameter("password")));
-    System.out.println(userLoginRequest.getPassword());
     try {
       User user = userRepository.login(userLoginRequest);
       if (user != null) {

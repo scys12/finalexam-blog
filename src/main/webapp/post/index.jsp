@@ -50,11 +50,17 @@
                     User user = (User) session.getAttribute("user");
                     List<Post> posts = postRepository.getUserPosts(user.getId());
                     for(Post item: posts){%> 
+                        <%
+                            String title = item.getTitle();
+                            title = title.length() > 30 ? title.substring(0,30)+"..." : title;
+                            String description = item.getDescription();
+                            description = description.length() > 30 ? description.substring(0,30)+"..." : description;
+                        %>
                         <tr>
                             <td><%=item.getId()%></td>
-                                <td style="word-wrap: break-word"><%=item.getTitle()%></td>
+                                <td style="word-wrap: break-word"><%=title%></td>
                                 <td style="word-wrap: break-word">
-                                    <%=item.getDescription()%>
+                                    <%=description%>
                                 </td>
                             <td class="d-flex justify-content-center">
                                 <a class="btn btn-info mr-2" href="show.jsp?id=<%=item.getId()%>">Show</a>
